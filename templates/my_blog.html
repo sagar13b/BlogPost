@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+
+<div class="container-fluid">
+    <div class="container">
+        <h1>Welcome to ClassProject</h1>
+    </div>
+    {% for i in blog %}
+    <div class="container">
+        <p><h4><b>{{i.title}}</b></h4></p>
+        <div class="row">
+            <div class="col-3">
+                <img src="{{ i.body_image.url }}" width="150">
+            </div>
+            <div class="col-6">
+                <p>{{ i.summary }}</p>
+                <p>{{i.likes}}</p>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <p>{{ i.pub_data }}</p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form method="GET" action="{% url 'update' i.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">UPDATE</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <form method="POST" action="{% url 'deleteblog' i.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">DELETE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

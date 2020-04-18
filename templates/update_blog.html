@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+<div class="container">
+    <p><h3>UPDATE BLOG</h3></p>
+</div>
+<div class="container">
+    <form method="POST", action="{% url 'update' blog.id %}", enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="title">Blog Title</label><br/>
+        <input type="text" id="title" name="tit" value="{{blog.title}}" size="100"><br/>
+        <label for="body">Blog</label><br/>
+        <textarea id="body" name="bo" rows="5" cols="100">{{blog.body}}</textarea><br/>
+        <label for="image1">Blog image</label><br/>
+        <input type="file" id="image1" name="im"><br/><br/>
+        <a href="{{ blog.image.url }}">{{ blog.image.url }}</a>
+        <button type="submit" class="btn btn-primary">UPDATE</button>
+    </form>
+</div>
+
+
+{% endblock %}

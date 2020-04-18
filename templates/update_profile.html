@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+
+<h1>Update Profile</h1>
+
+<form method="POST" action="{% url 'updatep' user.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if ud.profile_pic.url != None %}
+    <img src="{{ ud.profile_pic.url }}" height="100">
+    {% endif %}
+    <br/>
+    <label for="upic">Update Profile pic</label><br/>
+    <input type="file" id="upic" name="upic"><br/>
+    <label for="fname">First Name</label><br/>
+    <input type="text" id="fname" name="FNAME" value="{{ ud.fname }}"><br/>
+    <label for="mname">Middle Name</label><br/>
+    <input type="text" id="mname" name="MNAME" value="{{ ud.mname }}"><br/>
+    <label for="lname">Last Name</label><br/>
+    <input type="text" id="lname" name="LNAME" value="{{ ud.lname }}"><br/>
+    <label for="uaddress">Address</label><br/>
+    <input type="text" id="uaddress" name="uaddress" value="{{ ud.address }}"><br/>
+    <label for="uemail">Email ID</label><br/>
+    <input type="email" id="uemail" name="uemail" value="{{ ud.email_id }}"><br/>
+    <label for="uphone">Phone Number</label><br/>
+    <input type="number" id="uphone" name="uphone" value="{{ ud.phone_no }}"><br/><br/>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+</form>
+
+{% endblock %}

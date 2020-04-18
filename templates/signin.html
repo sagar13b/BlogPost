@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+<div class="container">
+    <p><h3>SIGNIN</h3></p>
+</div>
+<p>{{ error }}</p>
+<div class="container">
+    <form method="POST", action="{% url 'sin' %}">
+        {% csrf_token %}
+        <label for='name'>Username</label><br/>
+        <input id="name" type="text" name="username"><br/>
+        <label for="pass">Password</label><br/>
+        <input id="pass" type="password" name="password"><br/><br/>
+        <button type="submit">Signin</button>
+    </form>
+</div>
+
+
+{% endblock %}

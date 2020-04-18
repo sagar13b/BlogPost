@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+<div class="container">
+    <p><h3>SIGNUP</h3></p>
+</div>
+<p>{{error}}</p>
+<div class="container">
+    <form method="POST", action="{% url 'sup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Signup</button>
+    </form>
+</div>
+
+
+{% endblock %}

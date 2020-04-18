@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+{% load static %}
+<div class="container-fluid">
+    <p class="text-center pt-2 pd-2"><h2><b>Welcome {{ ud.fullname }}</b></h2></p>
+    <hr>
+    <div class="row">
+        <div class="ml-auto mr-auto">
+            {% if ud.profile_pic.url != None %}
+            <img src="{{ ud.profile_pic.url }}" height="150">
+            {% else %}
+            <img src="{% static 'default_profile_pic.png' %}" height="150">
+            {% endif %}
+        </div>
+    </div>
+    <table>
+        {% if ud.fname != None and ud.fname != 'None' %}
+        <tr>
+            <th>First Name</th>
+            <th>{{ud.fname}}</th>
+        </tr>
+        {% endif %}
+        {% if ud.mname != None and ud.mname != 'None' %}
+        <tr>
+            <th>Middle Name</th>
+            <th>{{ud.mname}}</th>
+        </tr>
+        {% endif %}
+        {% if ud.lname != None and ud.lname != 'None' %}
+        <tr>
+            <th>Last Name</th>
+            <th>{{ud.lname}}</th>
+        </tr>
+        {% endif %}
+        {% if ud.address != None and ud.address != 'None' %}
+        <tr>
+            <th>Address</th>
+            <th>{{ud.address}}</th>
+        </tr>
+        {% endif %}
+        {% if ud.email_id != None and ud.email_id != 'None' %}
+        <tr>
+            <th>Email</th>
+            <th>{{ud.email_id}}</th>
+        </tr>
+        {% endif %}
+        {% if ud.phone_no != 0 %}
+        <tr>
+            <th>Phone Number</th>
+            <th>{{ud.phone_no}}</th>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block 'container' %}
+
+<div class="container-fluid">
+    <div class="container">
+        <h1>Welcome {% if user.is_authenticated %} 
+            {{ user.username }} 
+            {% else %}
+            to BLOGPOST
+            {% endif %}
+        </h1>
+    </div>
+    <hr>
+    {% for i in blog %}
+    <div class="container">
+        <p><h4><b>{{i.title}}</b></h4></p>
+        <div class="row">
+            <div class="col">
+                <p><strong>Posted by : <a href="{% url 'vprofile' i.user_detail.id %}">{{i.user_detail.username}}</a></strong></p>
+            </div>
+            <div class="col">
+                <p><strong>{{i.pub_data}}</strong></p>
+            </div>
+        </div>
+        <p>
+            <img src="{{ i.body_image.url }}" height="300">
+        </p>
+        <p>
+            {{i.likes}}
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'likes' i.id user.id %}">
+                {% csrf_token %}
+                <button type="submit">Like</button>
+            </form>
+            {% endif %}
+        </p>
+        <hr>
+        <p>{{i.body}}</p>
+            {% for j in com %}
+                {% if i == j.blog_detail %}
+                <p>{{ j.user_detail.username }}</p>
+                <p>{{ j.comment }}</p>
+                {% endif %}
+            {% endfor %}
+        <hr>
+        {% if user.is_authenticated %}
+        <div class="row">
+            <form method="POST" action="{% url 'post_comment' i.id user.id %}">
+                {% csrf_token %}
+                <input type="text" name="c">
+                <button type="submit">Comment</button>
+            </form>
+        </div>
+        {% endif %}
+
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
